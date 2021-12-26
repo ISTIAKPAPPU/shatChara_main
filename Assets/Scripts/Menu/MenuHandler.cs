@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,50 +20,60 @@ public class MenuHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-		//PlayerPrefs.SetInt("Player_Level", 0);
+        //PlayerPrefs.SetInt("Player_Level", 0);
         //PlayerPrefs.SetInt("Unlocked_Level", 0);
-		
-		int selectedPlayer = PlayerPrefs.GetInt("Selected_Player");
+
+        int selectedPlayer = PlayerPrefs.GetInt("Selected_Player");
         int selectedBall = PlayerPrefs.GetInt("Selected_Ball");
         if (selectedPlayer == 0 || selectedBall == 0)
         {
             PlayerPrefs.SetInt("Selected_Player", 1);
             PlayerPrefs.SetInt("Selected_Ball", 1);
         }
+
         int menuStat = PlayerPrefs.GetInt("Menu_Stat");
-        if (menuStat == 0) { menuBtn.SetActive(true); }
-        if(menuStat == 1) { levelMenu.SetActive(true); }
+        if (menuStat == 0)
+        {
+            menuBtn.SetActive(true);
+        }
+
+        if (menuStat == 1)
+        {
+            levelMenu.SetActive(true);
+        }
 
         int levelLocked = PlayerPrefs.GetInt("Unlocked_Level");
-        for(int i = 0; i < locked.Length; i++)
+        for (int i = 0; i < locked.Length; i++)
         {
             if (i < levelLocked)
             {
                 locked[i].SetActive(false);
             }
+
+            if (i > levelLocked)
+            {
+                locked[i].SetActive(true);
+            }
+        }
+        
+    }
+
+    void Update()
+    {
+        int levelLocked = PlayerPrefs.GetInt("Unlocked_Level");
+        for (int i = 0; i < locked.Length; i++)
+        {
+            if (i < levelLocked)
+            {
+                locked[i].SetActive(false);
+            }
+
             if (i > levelLocked)
             {
                 locked[i].SetActive(true);
             }
         }
     }
-	
-	void Update ()
-	{
-		int levelLocked = PlayerPrefs.GetInt("Unlocked_Level");
-        for(int i = 0; i < locked.Length; i++)
-        {
-            if (i < levelLocked)
-            {
-                locked[i].SetActive(false);
-            }
-            if (i > levelLocked)
-            {
-                locked[i].SetActive(true);
-            }
-        }
-	}
 
     public void OnClickPlay()
     {
@@ -70,12 +81,14 @@ public class MenuHandler : MonoBehaviour
         menuBtn.SetActive(false);
         levelMenu.SetActive(true);
     }
+
     public void OnClickShop()
     {
         ballSelectionMenu.SetActive(true);
         menuBtn.SetActive(false);
         levelMenu.SetActive(false);
     }
+
     public void OnClickSettings()
     {
         ballSelectionMenu.SetActive(false);
@@ -114,6 +127,7 @@ public class MenuHandler : MonoBehaviour
         settingsMenu.SetActive(false);
         selectPlayerMenu.SetActive(true);
     }
+
     public void OnClickBackFromPlayer()
     {
         selectPlayerMenu.SetActive(false);
@@ -142,12 +156,13 @@ public class MenuHandler : MonoBehaviour
         exitMenu.SetActive(false);
         selectPlayerMenu.SetActive(false);
     }
-	
+
 
     public void OnClickLevel1()
     {
         PlayerPrefs.SetInt("Player_Level", 0);
         SceneManager.LoadScene("Level");
+   
     }
 
     public void OnClickLevel2()

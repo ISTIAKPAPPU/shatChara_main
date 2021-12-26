@@ -81,7 +81,7 @@ public class LevelManager : MonoBehaviour
                     if (GameValue.PlayerTurnCounter == 3)
                     {
                         GameValue.CanTakeInput = false;
-                        AiController.Instance.transform.GetComponent<GameRtsController>().throwPoint.SetActive(false);
+                        //AiController.Instance.transform.GetComponent<GameRtsController>().throwPoint.SetActive(false);
                         var ret = false;
                         UiController.Uc.UpdateAiScore();
                         UiController.Uc.OpenPanel("You Lose!", () => { ret = true; });
@@ -109,7 +109,7 @@ public class LevelManager : MonoBehaviour
 
             if (GameValue.BallTransform != null)
                 Destroy(GameValue.BallTransform.gameObject);
-            scriptController.SetActive(false);
+           // scriptController.SetActive(false);
             playerListTransform.GetComponent<UpdateSortingLayer>().enabled = false;
             LocalInit();
             await Task.Delay(1000);
@@ -160,8 +160,9 @@ public class LevelManager : MonoBehaviour
             player.GetComponent<MoveVelocity>().SetVelocity(Vector3.zero);
             player.GetComponent<MovePositionDirect>().enabled = false;
             player.transform.position = player.GetComponent<PlayerData>().initialPos;
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            player.GetComponent<Rigidbody2D>().constraints =
+                RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY |
+                RigidbodyConstraints2D.FreezeRotation;
         }
     }
 

@@ -29,17 +29,6 @@ public class UpdateAiSortingLayer : MonoBehaviour
         {
             int index = _aiList.FindIndex(a => a == player);
             player.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = index + 1;
-            if (GameValue.PlayerTurn != GameValue.PlayerWillPlay.Ai)
-            {
-                if (GameValue.BallTransform != null)
-                {
-                    if (player != GameValue.BallTransform.GetComponent<BallManager>().ballPicker)
-                    {
-                        //player.transform.GetChild(0).GetComponent<Animator>().SetBool("Seat", false);
-                       // player.transform.GetChild(0).GetComponent<Animator>().SetBool("Throw", true);
-                    }
-                }
-            }
         }
     }
 }

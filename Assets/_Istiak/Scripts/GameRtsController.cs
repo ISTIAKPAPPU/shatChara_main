@@ -33,12 +33,18 @@ public class GameRtsController : MonoBehaviour
             {
                 if (GameValue.SelectedPlayer != null)
                 {
+                    GameValue.SelectedPlayer.transform.GetComponent<Rigidbody2D>().constraints =
+                        RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY |
+                        RigidbodyConstraints2D.FreezeRotation;
                     GameValue.SelectedPlayer.transform.GetChild(1).gameObject.SetActive(false);
                     GameValue.SelectedPlayer.transform.GetComponent<PlayerMovementKeys>().enabled = false;
                 }
 
                 JoyStickController.jc.ActiveJoystick();
                 GameValue.SelectedPlayer = playerObj;
+                var rb = GameValue.SelectedPlayer.transform.GetComponent<Rigidbody2D>();
+                rb.constraints = RigidbodyConstraints2D.None;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                 GameValue.SelectedPlayer.transform.GetChild(1).gameObject.SetActive(true);
                 playerObj.GetComponent<PlayerMovementKeys>().enabled = true;
             }
@@ -53,12 +59,18 @@ public class GameRtsController : MonoBehaviour
         {
             if (GameValue.SelectedPlayer != null)
             {
+                GameValue.SelectedPlayer.transform.GetComponent<Rigidbody2D>().constraints =
+                    RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY |
+                    RigidbodyConstraints2D.FreezeRotation;
                 GameValue.SelectedPlayer.transform.GetChild(1).gameObject.SetActive(false);
                 GameValue.SelectedPlayer.transform.GetComponent<PlayerMovementKeys>().enabled = false;
             }
 
             JoyStickController.jc.ActiveJoystick();
             GameValue.SelectedPlayer = playerObj;
+            var rb = GameValue.SelectedPlayer.transform.GetComponent<Rigidbody2D>();
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             GameValue.SelectedPlayer.transform.GetChild(1).gameObject.SetActive(true);
             playerObj.GetComponent<PlayerMovementKeys>().enabled = true;
         }

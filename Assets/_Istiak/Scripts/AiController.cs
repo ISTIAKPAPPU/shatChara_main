@@ -353,6 +353,9 @@ public class AiController : MonoBehaviour
         player.transform.GetComponent<IMovePosition>()
             .SetMovePosition(ballPos);
         GameValue.SelectedPlayer = player;
+        var rb = GameValue.SelectedPlayer.transform.GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public IEnumerator PassBall()

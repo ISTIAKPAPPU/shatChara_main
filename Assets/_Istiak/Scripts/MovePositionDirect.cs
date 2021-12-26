@@ -24,6 +24,9 @@ public class MovePositionDirect : MonoBehaviour, IMovePosition
                 {
                     isStart = false;
                     GameValue.SelectedPlayer.transform.GetComponent<MovePositionDirect>().enabled = false;
+                    GameValue.SelectedPlayer.transform.GetComponent<Rigidbody2D>().constraints =
+                        RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY |
+                        RigidbodyConstraints2D.FreezeRotation;
                     GameValue.SelectedPlayer = null;
                 }
                 else

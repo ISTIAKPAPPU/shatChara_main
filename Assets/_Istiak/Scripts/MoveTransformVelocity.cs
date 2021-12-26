@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BallScripts;
+using UnityEngine;
 
 public class MoveTransformVelocity : MonoBehaviour, IMoveVelocity
 {
@@ -7,11 +8,12 @@ public class MoveTransformVelocity : MonoBehaviour, IMoveVelocity
     private Vector3 velocityVector;
     private float movementSpeed;
     public Animator animator;
+
     private void Awake()
     {
         animator = transform.GetChild(0).GetComponent<Animator>();
-        
     }
+
     public void SetVelocity(Vector3 velocityVector)
     {
         this.velocityVector = velocityVector;
@@ -33,20 +35,15 @@ public class MoveTransformVelocity : MonoBehaviour, IMoveVelocity
     {
         this.enabled = true;
     }
+
     private void Anim()
     {
         if (velocityVector != Vector3.zero)
         {
             animator.SetFloat("Horizontal", velocityVector.x);
             animator.SetFloat("Vertical", velocityVector.y);
-            animator.SetBool("Seat", false);
-            // animator.SetBool("Seat", true);
-            // animator.SetBool("Seat", false);
-        }
-        
 
+        }
         animator.SetFloat("Speed", movementSpeed);
     }
-    
-    
 }

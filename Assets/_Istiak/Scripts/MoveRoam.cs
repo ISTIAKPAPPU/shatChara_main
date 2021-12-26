@@ -7,11 +7,13 @@ public class MoveRoam : MonoBehaviour {
     private Vector3 targetMovePosition;
     [SerializeField] private float maxMoveRoam = 30f;
     [SerializeField] private float minMoveRoam = 10f;
+    public Animator animator;
 
-    private void Awake() {
+    private void Awake()
+    {
+        animator = transform.GetChild(0).GetComponent<Animator>();
         startPosition = transform.position;
     }
-
     private void Start() {
         SetRandomMovePosition();
     }
@@ -22,7 +24,7 @@ public class MoveRoam : MonoBehaviour {
 
     private void Update() {
         SetMovePosition(targetMovePosition);
-
+        animator.SetBool("Seat", false);
         float arrivedAtPositionDistance = 1f;
         if (Vector3.Distance(transform.position, targetMovePosition) < arrivedAtPositionDistance) {
             // Reached position
