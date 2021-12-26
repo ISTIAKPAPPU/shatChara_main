@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour
     public Transform playerListTransform;
     public Transform enemyListTransform;
     public GameObject scriptController;
+    public GameObject checkpointPlayer;
+    public GameObject checkpointAi;
 
     private void OnEnable()
     {
@@ -26,9 +28,22 @@ public class LevelManager : MonoBehaviour
     [ContextMenu("Start Game")]
     public async void StartGame()
     {
+        checkpointAi.SetActive(false);
+        checkpointPlayer.SetActive(false);
         LocalInit();
         GameValue.GlobalLevel++;
         var ret = false;
+        if (GameValue.GlobalLastPlayer == GameValue.PlayerWillPlay.Ai ||
+            GameValue.GlobalLastPlayer == GameValue.PlayerWillPlay.None)
+        {
+            GameValue.PlayerTurn = GameValue.PlayerWillPlay.Player;
+        }
+        else
+        {
+            GameValue.PlayerTurn = GameValue.PlayerWillPlay.Ai;
+            AiController.Instance.canAttack = true;
+        }
+
         UiController.Uc.OpenPanel("Round " + GameValue.GlobalLevel, () => { ret = true; });
         while (!ret)
         {
@@ -37,8 +52,7 @@ public class LevelManager : MonoBehaviour
 
         scriptController.SetActive(true);
         playerListTransform.GetComponent<UpdateSortingLayer>().enabled = true;
-        if (GameValue.GlobalLastPlayer == GameValue.PlayerWillPlay.Ai ||
-            GameValue.GlobalLastPlayer == GameValue.PlayerWillPlay.None)
+        if (GameValue.PlayerTurn == GameValue.PlayerWillPlay.Player)
         {
             AiController.Instance.PlayWithNormalAiBegan();
         }
@@ -109,7 +123,7 @@ public class LevelManager : MonoBehaviour
 
             if (GameValue.BallTransform != null)
                 Destroy(GameValue.BallTransform.gameObject);
-           // scriptController.SetActive(false);
+            // scriptController.SetActive(false);
             playerListTransform.GetComponent<UpdateSortingLayer>().enabled = false;
             LocalInit();
             await Task.Delay(1000);
@@ -152,7 +166,7 @@ public class LevelManager : MonoBehaviour
         foreach (Transform player in playerListTransform)
         {
             ResetAnimationPlayer(player);
-            player.transform.GetChild(0).localScale=new Vector3(1f, 1f, 1f);
+            player.transform.GetChild(0).localScale = new Vector3(1f, 1f, 1f);
             JoyStickController.jc.DeActiveJoystick();
             player.GetChild(1).gameObject.SetActive(false);
             player.GetComponent<PlayerData>().playerTurnEnd = false;
@@ -176,8 +190,8 @@ public class LevelManager : MonoBehaviour
 
     private void ResetAnimationAi(Transform player)
     {
-        player.GetChild(0).GetChild(0).localScale=new Vector3(-1f, 1f, 1f);
-        player.GetChild(1).GetChild(0).localScale=new Vector3(-1f, 1f, 1f);
+        player.GetChild(0).GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
+        player.GetChild(1).GetChild(0).localScale = new Vector3(-1f, 1f, 1f);
         player.GetChild(0).GetChild(0).GetComponent<Animator>().SetFloat("Horizontal", 0f);
         player.GetChild(1).GetChild(0).GetComponent<Animator>().SetFloat("Horizontal", 0f);
         player.GetChild(0).GetChild(0).GetComponent<Animator>().SetFloat("Vertical", 0f);

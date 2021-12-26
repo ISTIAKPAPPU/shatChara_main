@@ -23,7 +23,7 @@ public class AiController : MonoBehaviour
     public static event Action<GameObject, GameObject> MoveBallToPlayerThrowPoint;
     private GameObject currentAiObj;
     private TweenVariables tv;
-    [HideInInspector] public bool canAttack;
+     public bool canAttack;
 
     private void OnEnable()
     {
@@ -38,7 +38,6 @@ public class AiController : MonoBehaviour
     [ContextMenu("PlayWithSmartAI(Beginning)")]
     public void PlayWithSmartAiBegan()
     {
-        GameValue.PlayerTurn = GameValue.PlayerWillPlay.Ai;
         PlayWithSmartAI(true);
     }
 
@@ -48,7 +47,6 @@ public class AiController : MonoBehaviour
         var dialogue = Dialogue.Instance;
         if (string.IsNullOrWhiteSpace(dialogue.txtDisplay.text))
             dialogue.StartTyping("Select A player");
-        GameValue.PlayerTurn = GameValue.PlayerWillPlay.Player;
         foreach (Transform ai in enemyList)
         {
             ai.GetComponent<AiPlayer>().NormalAI();
