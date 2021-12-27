@@ -46,7 +46,7 @@ public class AiController : MonoBehaviour
     {
         var dialogue = Dialogue.Instance;
         if (string.IsNullOrWhiteSpace(dialogue.txtDisplay.text))
-            dialogue.StartTyping("Select A player");
+            dialogue.StartTyping("Click on foot To Select A player ");
         foreach (Transform ai in enemyList)
         {
             ai.GetComponent<AiPlayer>().NormalAI();

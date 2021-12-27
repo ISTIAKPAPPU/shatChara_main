@@ -39,7 +39,7 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         txtDisplay.text = "";
     }
 }
