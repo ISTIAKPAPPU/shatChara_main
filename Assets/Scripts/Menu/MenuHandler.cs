@@ -17,6 +17,8 @@ public class MenuHandler : MonoBehaviour
     public GameObject ballSelectionMenu;
     public GameObject lockedMsg;
 
+    public SceneLoader sceneLoader;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +57,6 @@ public class MenuHandler : MonoBehaviour
                 locked[i].SetActive(true);
             }
         }
-        
     }
 
     void Update()
@@ -161,8 +162,7 @@ public class MenuHandler : MonoBehaviour
     public void OnClickLevel1()
     {
         PlayerPrefs.SetInt("Player_Level", 0);
-        SceneManager.LoadScene("Level");
-   
+        sceneLoader.LoadLevel("Level");
     }
 
     public void OnClickLevel2()
@@ -171,7 +171,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 1)
         {
             PlayerPrefs.SetInt("Player_Level", 1);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 1");
         }
         else
         {
@@ -185,7 +185,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 2)
         {
             PlayerPrefs.SetInt("Player_Level", 2);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 2");
         }
         else
         {
@@ -199,7 +199,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 3)
         {
             PlayerPrefs.SetInt("Player_Level", 3);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 3");
         }
         else
         {
@@ -213,7 +213,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 4)
         {
             PlayerPrefs.SetInt("Player_Level", 4);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 4");
         }
         else
         {
@@ -227,7 +227,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 5)
         {
             PlayerPrefs.SetInt("Player_Level", 5);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 5");
         }
         else
         {
@@ -241,7 +241,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 6)
         {
             PlayerPrefs.SetInt("Player_Level", 6);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 6");
         }
         else
         {
@@ -255,7 +255,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 7)
         {
             PlayerPrefs.SetInt("Player_Level", 7);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 7");
         }
         else
         {
@@ -269,7 +269,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 8)
         {
             PlayerPrefs.SetInt("Player_Level", 8);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 8");
         }
         else
         {
@@ -283,7 +283,7 @@ public class MenuHandler : MonoBehaviour
         if (unlockedLevel >= 9)
         {
             PlayerPrefs.SetInt("Player_Level", 9);
-            SceneManager.LoadScene("Level");
+            sceneLoader.LoadLevel("Level 9");
         }
         else
         {

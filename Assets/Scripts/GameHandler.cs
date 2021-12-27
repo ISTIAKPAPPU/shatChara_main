@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
-    public GameObject[] levels;
+    public GameObject level;
     public GameObject toss;
 
     public GameObject timer;
@@ -42,7 +42,7 @@ public class GameHandler : MonoBehaviour
         int playerLevel = PlayerPrefs.GetInt("Player_Level");
        // timer.SetActive(true);
         print("Lvl " + playerLevel);
-        levels[playerLevel].SetActive(true);
+        level.SetActive(true);
         PlayerPrefs.SetInt("Start_Game", 1);
         //Obs();
     }

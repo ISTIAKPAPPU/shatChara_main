@@ -81,6 +81,10 @@ namespace MyGame.Utils
                 }
                 case true when !isMidYPositive:
                 {
+                    if (Mathf.Abs(initialPosition.y) > 35)
+                    {
+                        initialPosition.y = 30;
+                    }
                     var yPos = Mathf.Abs(initialPosition.y) + middlePosition.y;
                     endPos = new Vector3(Mathf.Abs(initialPosition.x), Mathf.Abs(yPos), 0);
                     endPos.x *= -1;
@@ -88,6 +92,10 @@ namespace MyGame.Utils
                 }
                 case true:
                 {
+                    if (Mathf.Abs(initialPosition.y) > 35)
+                    {
+                        initialPosition.y = 30;
+                    }
                     var yPos = Mathf.Abs(initialPosition.y) + middlePosition.y;
                     endPos = new Vector3(Mathf.Abs(initialPosition.x), Mathf.Abs(yPos), 0);
                     endPos.x *= -1;

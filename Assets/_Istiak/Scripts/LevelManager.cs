@@ -41,7 +41,6 @@ public class LevelManager : MonoBehaviour
         else
         {
             GameValue.PlayerTurn = GameValue.PlayerWillPlay.Ai;
-            AiController.Instance.canAttack = true;
         }
 
         UiController.Uc.OpenPanel("Round " + GameValue.GlobalLevel, () => { ret = true; });
@@ -50,16 +49,21 @@ public class LevelManager : MonoBehaviour
             await Task.Yield();
         }
 
+
+        // playerListTransform.GetComponent<UpdateSortingLayer>().enabled = true;
         scriptController.SetActive(true);
-        playerListTransform.GetComponent<UpdateSortingLayer>().enabled = true;
         if (GameValue.PlayerTurn == GameValue.PlayerWillPlay.Player)
         {
+            AiController.Instance.canAttack = true;
             AiController.Instance.PlayWithNormalAiBegan();
         }
         else
         {
+            AiController.Instance.canAttack = false;
             AiController.Instance.PlayWithSmartAiBegan();
         }
+
+       
     }
 
     private void GlobalInit()
@@ -123,8 +127,8 @@ public class LevelManager : MonoBehaviour
 
             if (GameValue.BallTransform != null)
                 Destroy(GameValue.BallTransform.gameObject);
-            // scriptController.SetActive(false);
-            playerListTransform.GetComponent<UpdateSortingLayer>().enabled = false;
+            scriptController.SetActive(false);
+            // playerListTransform.GetComponent<UpdateSortingLayer>().enabled = false;
             LocalInit();
             await Task.Delay(1000);
             if (GameValue.GlobalLevel <= 2)
